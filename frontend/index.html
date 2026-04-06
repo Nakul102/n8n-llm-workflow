@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LLM Playground</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="wrapper">
+
+  <h1>LLM Playground</h1>
+
+  <!-- Endpoint -->
+  <input id="endpoint" type="text"
+    value="http://localhost:5678/webhook/ask-llm"
+    placeholder="Webhook URL" />
+
+  <!-- Prompt -->
+  <textarea id="prompt" placeholder="Ask something..."></textarea>
+
+  <button onclick="sendRequest()">Send</button>
+
+  <!-- Response -->
+  <div id="responseSection" class="hidden">
+    <div id="status"></div>
+    <div id="model"></div>
+    <pre id="output"></pre>
+  </div>
+
+  <!-- History -->
+  <div id="historySection" class="hidden">
+    <h3>Recent Requests</h3>
+    <div id="history"></div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

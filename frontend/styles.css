@@ -1,0 +1,74 @@
+body {
+  font-family: system-ui, sans-serif;
+  background: #111;
+  color: #eee;
+}
+
+.wrapper {
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+input, textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #eee;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #333;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #444;
+}
+
+#responseSection {
+  margin-top: 20px;
+}
+
+#status {
+  margin-bottom: 10px;
+}
+
+#output {
+  background: #1a1a1a;
+  padding: 10px;
+  border: 1px solid #333;
+  white-space: pre-wrap;
+}
+
+#historySection {
+  margin-top: 20px;
+}
+
+.history-item {
+  padding: 6px;
+  border: 1px solid #333;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.history-item:hover {
+  background: #222;
+}
+
+.hidden {
+  display: none;
+}

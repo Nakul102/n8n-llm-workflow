@@ -1,0 +1,116 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ask-llm",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "d8488c9a-db7e-4001-9713-cbf7431b6a2f",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        220
+      ],
+      "webhookId": "ask-llm-demo"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$env.OPENROUTER_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"model\": \"openai/gpt-oss-20b:free\", \"messages\": [{\"role\": \"system\", \"content\": \"You are a helpful assistant. Answer clearly and concisely.\"}, {\"role\": \"user\", \"content\": \"{{ $json.body.prompt }}\"}], \"max_tokens\": 512, \"temperature\": 0.7}",
+        "options": {}
+      },
+      "id": "87452f6a-baf3-4fd1-a725-c51671ec8f52",
+      "name": "Call OpenRouter API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        280,
+        80
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "vejRqiSiVNSTBj5D",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        560,
+        180
+      ],
+      "id": "7bf6d687-0454-4b36-afc0-44c7c0b7ed7b",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Call OpenRouter API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call OpenRouter API": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7281b0f4-7fc0-44bc-af2f-b9f64af9a121",
+  "meta": {
+    "instanceId": "876768f04853aeba4b140777df81d590866afde48213e871453821a798382b18"
+  },
+  "id": "yhEqIxBMwM09gy9m",
+  "tags": [
+    {
+      "createdAt": "2026-04-05T15:51:50.481Z",
+      "updatedAt": "2026-04-05T15:51:50.481Z",
+      "id": "noTCpbw3lIYCYuuL",
+      "name": "LLM Demo"
+    }
+  ]
+}
